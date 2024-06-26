@@ -1,0 +1,63 @@
+Create table Egg_Brands (
+Brand_id int primary key auto_increment,
+Brand_name varchar(20)
+);
+Create table Egg_Category (
+Category_id int primary key auto_increment,
+Category varchar(2)
+);
+Create table Product (
+Product_id int primary key auto_increment,
+Brand_id int NOT NULL,
+Category_id int NOT NULL,
+Total_eggs int NOT NULL,
+Date_of_manufactured date,
+Expiration_date date as (Date_of_manufactured + INTERVAL 25 DAY),
+Price_per_unit decimal(5,2),
+FOREIGN KEY (Brand_id) REFERENCES Egg_Brands(Brand_id),
+FOREIGN KEY (Category_id) REFERENCES Egg_Category(Category_id)
+);
+Create table City (
+City_id int primary key auto_increment,
+City VARCHAR(20),
+Days_delivery int NOT NULL
+);
+Create table Client_ (
+Client_id int primary key auto_increment,
+Second_name VARCHAR(20),
+First_name VARCHAR(20),
+Middle_name VARCHAR(20),
+Email VARCHAR(30),
+Phone_number VARCHAR(11),
+City_id int NOT NULL,
+Street VARCHAR(20),
+Building_number VARCHAR(4),
+FOREIGN KEY (City_id) REFERENCES City(City_id)
+);
+Create table Buy (
+Buy_id int primary key auto_increment,
+Buy_description varchar(255),
+Client_id int NOT NULL,
+FOREIGN KEY (Client_id) REFERENCES Client_(Client_id)
+);
+Create table Step (
+Step_id int primary key auto_increment,
+Name_step varchar(20)
+);
+Create table Buy_Product (
+Buy_product_id int primary key auto_increment,
+Buy_id int NOT NULL,
+Product_id int NOT NULL,
+Amount int NOT NULL,
+FOREIGN KEY (Buy_id) REFERENCES Buy(Buy_id),
+FOREIGN KEY (Product_id) REFERENCES Product(Product_id)
+);
+Create table Buy_step (
+Buy_step_id int primary key auto_increment,
+Buy_id int NOT NULL,
+Step_id int NOT NULL,
+Beginning_step_date date,
+Finish_step_date date,
+FOREIGN KEY (Buy_id) REFERENCES Buy(Buy_id),
+FOREIGN KEY (Step_id) REFERENCES Step(Step_id)
+);
