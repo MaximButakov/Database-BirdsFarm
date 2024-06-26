@@ -1,0 +1,4 @@
+insert into egg_brands(Brand_name)
+values ('Sunny Side'),
+('Healthy Eggs'),
+('Желтое и белое');

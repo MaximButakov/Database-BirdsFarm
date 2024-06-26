@@ -1,0 +1,4 @@
+insert into egg_category(Category)
+values ('C0'),
+('C1'),
+('C2');
